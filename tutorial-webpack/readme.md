@@ -65,3 +65,10 @@ npx webpack --stats detailed
      change "hello-world-text" -> variable buttonCssClass
 
      npm i @babel/core babel-loader @babel/plugin-proposal-class-properties @babel/preset-env --save-dev
+
+- 4. webpack plugins are additional javascript libraries that do everything that loaders cannot do
+
+  Plugins can also modify how the bundles themselves are created. Ex uglifyjs plugin takes the bundle.js and minimizes the contents
+  to decrease the bundle size
+
+  4.1 Minification of the resulting webpack bundle => add new TerserPlugin to decrease bundle size

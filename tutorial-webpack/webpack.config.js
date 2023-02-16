@@ -1,4 +1,5 @@
 const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin"); // include in webpack 5 no need to install again
 
 module.exports = {
   mode: "development",
@@ -49,4 +50,5 @@ module.exports = {
       },
     ],
   },
+  plugins: [new TerserPlugin()],
 };
