@@ -6,15 +6,15 @@ npx webpack
 
 npx webpack --stats detailed
 
-- custom webpack config
+- 1. custom webpack config
 
   then run npx webpack --config webpack.config.js
   --config mean you can specify the name of webpack config file.
 
   change ./src/index.js -> ./dist/bundle.js and check chrome console
 
-- Asset Modules
-  asset files various kind of images, fonts or plain text files -> all those files can be processed by Webpack using asset modules
+- 2. Asset Modules
+     asset files various kind of images, fonts or plain text files -> all those files can be processed by Webpack using asset modules
 
   4 types:
 
@@ -46,3 +46,22 @@ npx webpack --stats detailed
   - asset/source -> import some plaintext data as a javascipt string Ex: you have a text file that stores some data as plain text
 
     reads the contents of the file into a javascript string and inject that string directly into the javascript bundle
+
+- 3. Loaders allow you import all other kinds of files that you cant handle using Asset Module
+
+     css-loader: reads the contents of the CSS file and return this contents but doesn't do anything else with this css
+     style-loader: takes the CSS and injects it into the page using style tags
+
+     then npm install css-loader style-loader
+
+     apply for sass -> npm i sass-loader sass --save-dev
+
+     using latest javascript features with babel is the most popular Javascript compiler
+
+     Babel hay Babel JS là một trình biên dịch JavaScript, mã nguồn mở và miễn phí. Babel được sử dụng để biên dịch ECMAScript (ES) thành phiên bản tương thích ngược với JavaScript có thể chạy trên các môi trường JavaScript cũ hơn. Babel là công cụ phổ biến để sử dụng các tính năng mới nhất trong JavaScript.
+
+     this tool can convert modern javascript code into older javascript code that already support by all major browser
+
+     change "hello-world-text" -> variable buttonCssClass
+
+     npm i @babel/core babel-loader @babel/plugin-proposal-class-properties @babel/preset-env --save-dev
