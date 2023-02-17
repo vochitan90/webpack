@@ -1,4 +1,13 @@
-how to use webpack
+how to use webpack là công cụ giúp bạn compile các module Javascript.
+
+Một số ưu điểm khi dùng webpack
+
+Giúp cho cho project dễ dàng phát triển, quản lý, customize
+Tăng tốc độ cho project
+Phân chia các module và chỉ load khi cần
+Đóng gói tất cả file nguồn thành một file duy nhất, nhờ vào loader mà có thể biên dịch các loại file khác nhau
+Biến các tài nguyên tĩnh ( image, css) trở thành 1 module
+Chuyển đổi các mã nguồn : JSX, less, sass, scss thành js, ... ES6 -> ES5 thông qua babel transpiler ...
 
 npm i webpack webpack-cli --save-dev
 
@@ -49,26 +58,48 @@ npx webpack --stats detailed
 
 - 3. Loaders allow you import all other kinds of files that you cant handle using Asset Module
 
-     css-loader: reads the contents of the CSS file and return this contents but doesn't do anything else with this css
-     style-loader: takes the CSS and injects it into the page using style tags
+     - css-loader: reads the contents of the CSS file and return this contents but doesn't do anything else with this css
+     - style-loader: takes the CSS and injects it into the page using style tags
 
-     then npm install css-loader style-loader
+     - then npm install css-loader style-loader
 
-     apply for sass -> npm i sass-loader sass --save-dev
+     - apply for sass -> npm i sass-loader sass --save-dev
 
-     using latest javascript features with babel is the most popular Javascript compiler
+     - using latest javascript features with babel is the most popular Javascript compiler
 
-     Babel hay Babel JS là một trình biên dịch JavaScript, mã nguồn mở và miễn phí. Babel được sử dụng để biên dịch ECMAScript (ES) thành phiên bản tương thích ngược với JavaScript có thể chạy trên các môi trường JavaScript cũ hơn. Babel là công cụ phổ biến để sử dụng các tính năng mới nhất trong JavaScript.
+     - Babel hay Babel JS là một trình biên dịch JavaScript, mã nguồn mở và miễn phí. Babel được sử dụng để biên dịch ECMAScript (ES) thành phiên bản tương thích ngược với JavaScript có thể chạy trên các môi trường JavaScript cũ hơn. Babel là công cụ phổ biến để sử dụng các tính năng mới nhất trong JavaScript.
 
-     this tool can convert modern javascript code into older javascript code that already support by all major browser
+     - this tool can convert modern javascript code into older javascript code that already support by all major browser
 
-     change "hello-world-text" -> variable buttonCssClass
+     - change "hello-world-text" -> variable buttonCssClass
 
-     npm i @babel/core babel-loader @babel/plugin-proposal-class-properties @babel/preset-env --save-dev
+     - npm i @babel/core babel-loader @babel/plugin-proposal-class-properties @babel/preset-env --save-dev
 
 - 4. webpack plugins are additional javascript libraries that do everything that loaders cannot do
 
-  Plugins can also modify how the bundles themselves are created. Ex uglifyjs plugin takes the bundle.js and minimizes the contents
-  to decrease the bundle size
+  - Plugins can also modify how the bundles themselves are created. Ex uglifyjs plugin takes the bundle.js and minimizes the contents
+    to decrease the bundle size
 
-  4.1 Minification of the resulting webpack bundle => add new TerserPlugin to decrease bundle size
+    4.1 Minification of the resulting webpack bundle => add new TerserPlugin to decrease bundle size
+
+    4.2 Extracting CSS into a separate bundle with mini-css-extract-plugin -> Part 1
+
+        - this will make the size of our Javacript bundle much smaller -> faster to download
+
+        - this will allow us to load multiple files in parallel
+
+        - add mini css extract plugin in webpack config and change the rule of css and sass from style.loader to MiniCssExtractPlugin.loader
+
+        - add <link rel="stylesheet" href="./dist/style.css" /> to html
+
+        - Part 2: look at style.css
+
+    4.3 Broswer caching
+
+    - 4.3.1 Ly thuyet tuc la moi lan refresh page thi minh can download rat nhiu file ve de chay trang web , doi voi nguoi dung mobile thi cang te hai hon neu internet qua cham,
+
+    - may man la chung ta co solution va no dc goi la browser caching -> bundle.[contenthash].js
+
+    - Neu ta thay doi noi dung js file thi no se tao ra them 1 bundle voi ma MD5 hash nua (also work with css)
+
+    4.4 Clean dist folder before generate new bundles
