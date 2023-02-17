@@ -1,6 +1,7 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin"); // include in webpack 5 no need to install again
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -9,6 +10,10 @@ module.exports = {
     filename: "bundle.[contenthash].js",
     path: path.resolve(__dirname, "dist"),
     publicPath: "dist/",
+    clean: {
+      dry: true, //which files it's going to remove instead of actually removing them
+      keep: /\.css/,
+    },
   },
   module: {
     rules: [
@@ -55,6 +60,12 @@ module.exports = {
     new TerserPlugin(),
     new MiniCssExtractPlugin({
       filename: "style.[contenthash].css",
+    }),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        "**/*", //clean all the file base on the path in (output)
+        path.join(process.cwd(), "build/**/*"), // clean all the file inside the build folder
+      ],
     }),
   ],
 };

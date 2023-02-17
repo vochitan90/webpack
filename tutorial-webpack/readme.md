@@ -102,4 +102,8 @@ npx webpack --stats detailed
 
     - Neu ta thay doi noi dung js file thi no se tao ra them 1 bundle voi ma MD5 hash nua (also work with css)
 
-    4.4 Clean dist folder before generate new bundles
+      4.4 Clean dist folder before generate new bundles
+
+      -> using CleanWebpackPlugin
+
+      it also clean multiple folder -> cleanOnceBeforeBuildPatterns or you can use clean: true in output attr
