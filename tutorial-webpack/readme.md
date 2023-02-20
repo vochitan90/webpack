@@ -106,4 +106,31 @@ npx webpack --stats detailed
 
       -> using CleanWebpackPlugin
 
-      it also clean multiple folder -> cleanOnceBeforeBuildPatterns or you can use clean: true in output attr
+      it also clean multiple folder -> cleanOnceBeforeBuildPatterns (recommend) or you can use clean: true in output attr but only 2 property
+
+      4.5 generate html files automatically during webpack build process (cap nhat reference cua file js va css mot cach tu dong dung webpack html plugin)
+
+      publicPath -> remove 'dist/' and leave it empty
+
+      remove index.html and now we use the html in dist folder
+
+      4.6 customize html file -> use option title, filename, meta -> check github plugin
+
+      4.7 Handlebars: template engine
+
+      add test and use
+
+      {
+      test: /\.hbs$/,
+      use: ["handlebars-loader"],
+      },
+
+- 5.  Production vs Development builds (mode option)
+
+      Create 2 separate file webpack dev and webpack prod then config build in package.json
+
+      5.1 Reconfig for those 2 files
+
+      npm in webpack-dev-server --save-dev to run in localhost with port 9000
+
+- 6.  Multiple Page Applications
