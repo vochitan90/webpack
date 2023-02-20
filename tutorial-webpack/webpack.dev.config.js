@@ -14,9 +14,12 @@ module.exports = {
       writeToDisk: true,
     },
   },
-  entry: "./src/index.js",
+  entry: {
+    helloWorld: "./src/hello-world.js",
+    kiwi: "./src/kiwi.js",
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: "",
     // clean: {
@@ -78,9 +81,20 @@ module.exports = {
       // use default option is enough
     }),
     new HtmlWebpackPlugin({
+      filename: "helloWorld.html",
+      chunks: ["helloWorld"], // get it from entry
       title: "hello world",
-      template: "src/index.hbs",
-      description: "some description with handlebars",
+      template: "src/page-template.hbs",
+      description: "hello world",
+      minify: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: "kiwi.html",
+      chunks: ["kiwi"], // get it from entry
+      title: "kiwi",
+      template: "src/page-template.hbs",
+      description: "kiwi",
+      minify: false,
     }),
   ],
 };
