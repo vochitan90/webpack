@@ -6,6 +6,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "production", // none, production
+  optimization: {
+    splitChunks: {
+      chunks: "all", // will make the bundle file is smaller 486.a6f2d88f853db9a1ef7e.js
+      minSize: 3000, // it mean approximately less than 3kb will chunks (react) 294.6f6f967ff61d86993a73.js
+    },
+  },
   entry: {
     helloWorld: "./src/hello-world.js",
     kiwi: "./src/kiwi.js",
