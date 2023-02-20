@@ -6,9 +6,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "production", // none, production
-  entry: "./src/index.js",
+  entry: {
+    helloWorld: "./src/hello-world.js",
+    kiwi: "./src/kiwi.js",
+  },
   output: {
-    filename: "bundle.[contenthash].js",
+    filename: "[name].[contenthash].js", // [name] will use entry and replace
     path: path.resolve(__dirname, "dist"),
     publicPath: "",
     // clean: {
@@ -21,6 +24,12 @@ module.exports = {
       {
         test: /\.jpeg$/,
         type: "asset",
+        parser: {
+          dataUrlCondition: {
+            // change magic number (8kb)
+            maxSize: 3 * 1024, // (to 3kb)
+          },
+        },
       },
       {
         test: /\.(png|jpg)$/,
@@ -64,7 +73,7 @@ module.exports = {
   plugins: [
     // new TerserPlugin(), remove it on PROD
     new MiniCssExtractPlugin({
-      filename: "style.[contenthash].css",
+      filename: "[name].[contenthash].css",
     }),
     new CleanWebpackPlugin({
       // cleanOnceBeforeBuildPatterns: [
@@ -74,9 +83,20 @@ module.exports = {
       // use default option is enough
     }),
     new HtmlWebpackPlugin({
+      filename: "helloWorld.html",
+      chunks: ["helloWorld"], // get it from entry
       title: "hello world",
-      template: "src/index.hbs",
-      description: "some description with handlebars",
+      template: "src/page-template.hbs",
+      description: "hello world",
+      minify: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: "kiwi.html",
+      chunks: ["kiwi"], // get it from entry
+      title: "kiwi",
+      template: "src/page-template.hbs",
+      description: "kiwi",
+      minify: false,
     }),
   ],
 };
